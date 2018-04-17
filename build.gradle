@@ -1,0 +1,58 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+plugins {
+    id 'net.ltgt.apt' version '0.8'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.hainet'
+version = '1.0.0-SNAPSHOT'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// TODO: Check how does this work in this project.
+// Source: https://stackoverflow.com/questions/5170620/unable-to-use-intellij-with-a-generated-sources-folder/40890492#40890492
+sourceSets {
+    main {
+        java {
+            srcDir "${buildDir.absolutePath}/generated/source/kapt/main"
+        }
+    }
+}
+
+compileJava {
+    options.compilerArgs = [
+            '-Amapstruct.defaultComponentModel=spring'
+    ]
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter')
+
+    compileOnly('org.projectlombok:lombok')
+    // TODO: Check how does this work in this project.
+    // Source: https://github.com/mapstruct/mapstruct-examples/blob/master/mapstruct-lombok/build.gradle
+    apt('org.projectlombok:lombok')
+    compile('org.mapstruct:mapstruct-jdk8:1.2.0.Final')
+    apt('org.mapstruct:mapstruct-processor:1.2.0.Final')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
