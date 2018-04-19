@@ -3,13 +3,12 @@ package com.hainet.spring.mapstruct.sample.entity;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
-public class CreditCard {
+public class Entity {
 
-    private int id;
+    private String value;
 
-    private String number;
-
-    private LocalDate goodThru;
+    private LocalDate date;
 }

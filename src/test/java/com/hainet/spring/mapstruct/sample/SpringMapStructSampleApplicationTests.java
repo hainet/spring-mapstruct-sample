@@ -1,8 +1,8 @@
 package com.hainet.spring.mapstruct.sample;
 
-import com.hainet.spring.mapstruct.sample.entity.CreditCard;
-import com.hainet.spring.mapstruct.sample.mapper.CreditCardMapper;
-import com.hainet.spring.mapstruct.sample.model.CreditCardModel;
+import com.hainet.spring.mapstruct.sample.entity.Entity;
+import com.hainet.spring.mapstruct.sample.mapper.EntityMapper;
+import com.hainet.spring.mapstruct.sample.model.EntityModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +19,20 @@ import static org.junit.Assert.assertThat;
 public class SpringMapStructSampleApplicationTests {
 
     @Autowired
-    private CreditCardMapper mapper;
+    private EntityMapper mapper;
 
     @Test
     public void contextLoads() {
         // Setup
-        final CreditCard entity = new CreditCard();
-        entity.setId(1);
-        entity.setNumber("1234567890123456");
-        entity.setGoodThru(LocalDate.of(2018, 4, 30));
+        final Entity entity = new Entity();
+        entity.setValue("hainet");
+        entity.setDate(LocalDate.of(1970, 1, 1));
 
-        final CreditCardModel model = new CreditCardModel();
-        model.setId(1);
-        model.setNumber("1234567890123456");
-        model.setGoodThru("2018-04");
+        final EntityModel model = new EntityModel();
+        model.setValue("hainet");
+        model.setDate(LocalDate.of(1970, 1, 1));
+        model.setToString("1970-01-01");
+        model.setFormat("1970-01");
 
         assertThat(mapper.entityToModel(entity), is(model));
     }
