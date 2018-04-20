@@ -6,13 +6,17 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(uses = NestedEntityMapper.class)
+@Mapper(uses = {
+        NestedEntityMapper.class,
+
+})
 public interface EntityMapper {
 
     @Mappings({
             @Mapping(source = "date", target = "toString"),
             @Mapping(source = "date", target = "format", dateFormat = "yyyy-MM"),
-            @Mapping(source = "nestedEntity", target = "nestedEntityModel")
+            @Mapping(source = "nestedEntity", target = "nestedEntityModel"),
+            @Mapping(constant = "CONSTANT", target = "constant")
     })
     EntityModel entityToModel(Entity entity);
 }

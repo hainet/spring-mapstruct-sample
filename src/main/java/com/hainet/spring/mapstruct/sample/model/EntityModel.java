@@ -16,4 +16,6 @@ public class EntityModel {
     private String format;
 
     private NestedEntityModel nestedEntityModel;
+
+    private String constant;
 }

@@ -25,7 +25,7 @@ public class MapStructTest {
 
     @Test
     public void run() {
-        // Setup
+        // Entity
         final Entity entity = new Entity();
         entity.setValue("hainet");
         entity.setDate(LocalDate.of(1970, 1, 1));
@@ -33,6 +33,7 @@ public class MapStructTest {
         nestedEntity.setValue("hainet");
         entity.setNestedEntity(nestedEntity);
 
+        // Model
         final EntityModel model = new EntityModel();
         model.setValue("hainet");
         model.setDate(LocalDate.of(1970, 1, 1));
@@ -41,6 +42,7 @@ public class MapStructTest {
         final NestedEntityModel nestedEntityModel = new NestedEntityModel();
         nestedEntityModel.setValue("hainet");
         model.setNestedEntityModel(nestedEntityModel);
+        model.setConstant("CONSTANT");
 
         assertThat(mapper.entityToModel(entity), is(model));
     }
