@@ -1,9 +1,11 @@
 package com.hainet.spring.mapstruct.sample;
 
 import com.hainet.spring.mapstruct.sample.entity.Entity;
+import com.hainet.spring.mapstruct.sample.entity.Name;
 import com.hainet.spring.mapstruct.sample.entity.NestedEntity;
 import com.hainet.spring.mapstruct.sample.mapper.EntityMapper;
 import com.hainet.spring.mapstruct.sample.model.EntityModel;
+import com.hainet.spring.mapstruct.sample.model.NameModel;
 import com.hainet.spring.mapstruct.sample.model.NestedEntityModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +34,10 @@ public class MapStructTest {
         final NestedEntity nestedEntity = new NestedEntity();
         nestedEntity.setValue("hainet");
         entity.setNestedEntity(nestedEntity);
+        final Name name = new Name();
+        name.setFirstName("Haine");
+        name.setLastName("Takano");
+        entity.setName(name);
 
         // Model
         final EntityModel model = new EntityModel();
@@ -43,6 +49,9 @@ public class MapStructTest {
         nestedEntityModel.setValue("hainet");
         model.setNestedEntityModel(nestedEntityModel);
         model.setConstant("CONSTANT");
+        final NameModel nameModel = new NameModel();
+        nameModel.setFullName("Haine Takano");
+        model.setNameModel(nameModel);
 
         assertThat(mapper.entityToModel(entity), is(model));
     }

@@ -8,7 +8,7 @@ import org.mapstruct.Mappings;
 
 @Mapper(uses = {
         NestedEntityMapper.class,
-
+        NameMapper.class
 })
 public interface EntityMapper {
 
@@ -16,7 +16,8 @@ public interface EntityMapper {
             @Mapping(source = "date", target = "toString"),
             @Mapping(source = "date", target = "format", dateFormat = "yyyy-MM"),
             @Mapping(source = "nestedEntity", target = "nestedEntityModel"),
-            @Mapping(constant = "CONSTANT", target = "constant")
+            @Mapping(constant = "CONSTANT", target = "constant"),
+            @Mapping(source = "name", target = "nameModel")
     })
     EntityModel entityToModel(Entity entity);
 }
