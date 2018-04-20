@@ -19,5 +19,5 @@ public class EntityModel {
 
     private String constant;
 
-    private NameModel nameModel;
+    private FullNameModel fullNameModel;
 }

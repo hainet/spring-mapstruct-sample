@@ -17,7 +17,7 @@ public interface EntityMapper {
             @Mapping(source = "date", target = "format", dateFormat = "yyyy-MM"),
             @Mapping(source = "nestedEntity", target = "nestedEntityModel"),
             @Mapping(constant = "CONSTANT", target = "constant"),
-            @Mapping(source = "name", target = "nameModel")
+            @Mapping(source = "fullName", target = "fullNameModel")
     })
     EntityModel entityToModel(Entity entity);
 }

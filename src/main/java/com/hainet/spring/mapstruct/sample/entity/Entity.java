@@ -13,5 +13,5 @@ public class Entity {
 
     private NestedEntity nestedEntity;
 
-    private Name name;
+    private FullName fullName;
 }
