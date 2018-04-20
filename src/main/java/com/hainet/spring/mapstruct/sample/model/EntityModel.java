@@ -14,4 +14,6 @@ public class EntityModel {
     private String toString;
 
     private String format;
+
+    private NestedEntityModel nestedEntityModel;
 }
