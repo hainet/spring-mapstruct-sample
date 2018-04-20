@@ -1,9 +1,10 @@
 package com.hainet.spring.mapstruct.sample;
 
-import com.hainet.spring.mapstruct.sample.entity.Entity;
-import com.hainet.spring.mapstruct.sample.entity.FullName;
-import com.hainet.spring.mapstruct.sample.entity.NestedEntity;
+import com.hainet.spring.mapstruct.sample.entity.*;
+import com.hainet.spring.mapstruct.sample.mapper.CreditCardMapper;
 import com.hainet.spring.mapstruct.sample.mapper.EntityMapper;
+import com.hainet.spring.mapstruct.sample.mapper.FullNameMapper;
+import com.hainet.spring.mapstruct.sample.model.CreditCardModel;
 import com.hainet.spring.mapstruct.sample.model.EntityModel;
 import com.hainet.spring.mapstruct.sample.model.FullNameModel;
 import com.hainet.spring.mapstruct.sample.model.NestedEntityModel;
@@ -23,10 +24,16 @@ import static org.junit.Assert.assertThat;
 public class MapStructTest {
 
     @Autowired
-    private EntityMapper mapper;
+    private EntityMapper entityMapper;
+
+    @Autowired
+    private FullNameMapper fullNameMapper;
+
+    @Autowired
+    private CreditCardMapper creditCardMapper;
 
     @Test
-    public void run() {
+    public void basicMappingsTest() {
         // Entity
         final Entity entity = new Entity();
         entity.setValue("hainet");
@@ -34,10 +41,6 @@ public class MapStructTest {
         final NestedEntity nestedEntity = new NestedEntity();
         nestedEntity.setValue("hainet");
         entity.setNestedEntity(nestedEntity);
-        final FullName fullName = new FullName();
-        fullName.setFirstName("Haine");
-        fullName.setLastName("Takano");
-        entity.setFullName(fullName);
 
         // Model
         final EntityModel model = new EntityModel();
@@ -49,10 +52,37 @@ public class MapStructTest {
         nestedEntityModel.setValue("hainet");
         model.setNestedEntityModel(nestedEntityModel);
         model.setConstant("CONSTANT");
+
+        assertThat(entityMapper.entityToModel(entity), is(model));
+    }
+
+    @Test
+    public void customMethodsToMappersTest() {
+        // Entity
+        final FullName fullName = new FullName();
+        fullName.setFirstName("Haine");
+        fullName.setLastName("Takano");
+
+        // Model
         final FullNameModel fullNameModel = new FullNameModel();
         fullNameModel.setFullName("Haine Takano");
-        model.setFullNameModel(fullNameModel);
 
-        assertThat(mapper.entityToModel(entity), is(model));
+        assertThat(fullNameMapper.entityToModel(fullName), is(fullNameModel));
+    }
+
+    @Test
+    public void severalSourceParametersTest() {
+        // Entity
+        final CreditCardNumber number = new CreditCardNumber();
+        number.setNumber("1234567890123456");
+        final CreditCardBrand brand = new CreditCardBrand();
+        brand.setBrand("VISA");
+
+        // Model
+        final CreditCardModel model = new CreditCardModel();
+        model.setNumber("1234567890123456");
+        model.setBrand("VISA");
+
+        assertThat(creditCardMapper.entityToModel(number, brand), is(model));
     }
 }

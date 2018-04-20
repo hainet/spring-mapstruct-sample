@@ -5,7 +5,7 @@ import com.hainet.spring.mapstruct.sample.model.FullNameModel;
 import org.mapstruct.Mapper;
 
 @Mapper
-public interface NameMapper {
+public interface FullNameMapper {
 
     default FullNameModel entityToModel(FullName entity) {
         if (entity == null) {

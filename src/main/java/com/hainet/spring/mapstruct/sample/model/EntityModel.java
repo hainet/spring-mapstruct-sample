@@ -18,6 +18,4 @@ public class EntityModel {
     private NestedEntityModel nestedEntityModel;
 
     private String constant;
-
-    private FullNameModel fullNameModel;
 }

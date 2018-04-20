@@ -12,6 +12,4 @@ public class Entity {
     private LocalDate date;
 
     private NestedEntity nestedEntity;
-
-    private FullName fullName;
 }
