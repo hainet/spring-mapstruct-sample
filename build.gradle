@@ -24,16 +24,6 @@ version = '1.0.0-SNAPSHOT'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-// TODO: Check how does this work in this project.
-// Source: https://stackoverflow.com/questions/5170620/unable-to-use-intellij-with-a-generated-sources-folder/40890492#40890492
-sourceSets {
-    main {
-        java {
-            srcDir "${buildDir.absolutePath}/generated/source/kapt/main"
-        }
-    }
-}
-
 compileJava {
     options.compilerArgs = [
             '-Amapstruct.defaultComponentModel=spring'
@@ -48,8 +38,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter')
 
     compileOnly('org.projectlombok:lombok')
-    // TODO: Check how does this work in this project.
-    // Source: https://github.com/mapstruct/mapstruct-examples/blob/master/mapstruct-lombok/build.gradle
     apt('org.projectlombok:lombok')
     compile('org.mapstruct:mapstruct-jdk8:1.2.0.Final')
     apt('org.mapstruct:mapstruct-processor:1.2.0.Final')
