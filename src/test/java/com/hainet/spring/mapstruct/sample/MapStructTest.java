@@ -4,10 +4,8 @@ import com.hainet.spring.mapstruct.sample.entity.*;
 import com.hainet.spring.mapstruct.sample.mapper.CreditCardMapper;
 import com.hainet.spring.mapstruct.sample.mapper.EntityMapper;
 import com.hainet.spring.mapstruct.sample.mapper.FullNameMapper;
-import com.hainet.spring.mapstruct.sample.model.CreditCardModel;
-import com.hainet.spring.mapstruct.sample.model.EntityModel;
-import com.hainet.spring.mapstruct.sample.model.FullNameModel;
-import com.hainet.spring.mapstruct.sample.model.NestedEntityModel;
+import com.hainet.spring.mapstruct.sample.mapper.PersonMapper;
+import com.hainet.spring.mapstruct.sample.model.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +29,9 @@ public class MapStructTest {
 
     @Autowired
     private CreditCardMapper creditCardMapper;
+
+    @Autowired
+    private PersonMapper personMapper;
 
     @Test
     public void basicMappingsTest() {
@@ -84,5 +85,19 @@ public class MapStructTest {
         model.setBrand("VISA");
 
         assertThat(creditCardMapper.entityToModel(number, brand), is(model));
+    }
+
+    @Test
+    public void directlyReferringTest() {
+        // Entity
+        final Person entity = new Person();
+        entity.setName("hainet");
+
+        // Model
+        final PersonModel model = new PersonModel();
+        model.setName("hainet");
+        model.setAge(25);
+
+        assertThat(personMapper.entityToModel(entity, 25), is(model));
     }
 }
