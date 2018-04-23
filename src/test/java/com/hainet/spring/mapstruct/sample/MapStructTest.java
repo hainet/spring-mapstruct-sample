@@ -58,6 +58,33 @@ public class MapStructTest {
     }
 
     @Test
+    public void updatingExistingBeanInstancesTest() {
+        // Entity
+        final Entity entity = new Entity();
+        entity.setValue("hainet");
+        entity.setDate(LocalDate.of(1970, 1, 1));
+        final NestedEntity nestedEntity = new NestedEntity();
+        nestedEntity.setValue("hainet");
+        entity.setNestedEntity(nestedEntity);
+
+        // Model
+        final EntityModel model = new EntityModel();
+        model.setValue("hainet");
+        model.setDate(LocalDate.of(1970, 1, 1));
+        model.setToString("1970-01-01");
+        model.setFormat("1970-01");
+        final NestedEntityModel nestedEntityModel = new NestedEntityModel();
+        nestedEntityModel.setValue("hainet");
+        model.setNestedEntityModel(nestedEntityModel);
+        model.setConstant("CONSTANT");
+
+        final EntityModel actual = new EntityModel();
+        entityMapper.entityToModel(actual, entity);
+
+        assertThat(actual, is(model));
+    }
+
+    @Test
     public void customMethodsToMappersTest() {
         // Entity
         final FullName fullName = new FullName();
@@ -88,7 +115,7 @@ public class MapStructTest {
     }
 
     @Test
-    public void directlyReferringTest() {
+    public void directlyReferringToSourceParametersTest() {
         // Entity
         final Person entity = new Person();
         entity.setName("hainet");
