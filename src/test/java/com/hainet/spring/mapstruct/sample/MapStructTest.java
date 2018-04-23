@@ -1,10 +1,7 @@
 package com.hainet.spring.mapstruct.sample;
 
 import com.hainet.spring.mapstruct.sample.entity.*;
-import com.hainet.spring.mapstruct.sample.mapper.CreditCardMapper;
-import com.hainet.spring.mapstruct.sample.mapper.EntityMapper;
-import com.hainet.spring.mapstruct.sample.mapper.FullNameMapper;
-import com.hainet.spring.mapstruct.sample.mapper.PersonMapper;
+import com.hainet.spring.mapstruct.sample.mapper.*;
 import com.hainet.spring.mapstruct.sample.model.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +29,9 @@ public class MapStructTest {
 
     @Autowired
     private PersonMapper personMapper;
+
+    @Autowired
+    private PublicEntityMapper publicEntityMapper;
 
     @Test
     public void basicMappingsTest() {
@@ -126,5 +126,18 @@ public class MapStructTest {
         model.setAge(25);
 
         assertThat(personMapper.entityToModel(entity, 25), is(model));
+    }
+
+    @Test
+    public void mappingWithDirectFieldAccessTest() {
+        // Entity
+        final PublicEntity entity = new PublicEntity();
+        entity.value = "hainet";
+
+        // Model
+        final PublicEntityModel model = new PublicEntityModel();
+        model.value = "hainet";
+
+        assertThat(publicEntityMapper.entityToModel(entity), is(model));
     }
 }
