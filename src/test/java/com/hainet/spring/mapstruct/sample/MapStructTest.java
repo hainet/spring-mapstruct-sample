@@ -1,7 +1,10 @@
 package com.hainet.spring.mapstruct.sample;
 
 import com.hainet.spring.mapstruct.sample.entity.*;
-import com.hainet.spring.mapstruct.sample.mapper.*;
+import com.hainet.spring.mapstruct.sample.mapper.CreditCardMapper;
+import com.hainet.spring.mapstruct.sample.mapper.EntityMapper;
+import com.hainet.spring.mapstruct.sample.mapper.FullNameMapper;
+import com.hainet.spring.mapstruct.sample.mapper.PersonMapper;
 import com.hainet.spring.mapstruct.sample.model.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,29 +33,28 @@ public class MapStructTest {
     @Autowired
     private PersonMapper personMapper;
 
-    @Autowired
-    private PublicEntityMapper publicEntityMapper;
-
     @Test
     public void basicMappingsTest() {
         // Entity
         final Entity entity = new Entity();
-        entity.setValue("hainet");
+        entity.setValue("Value");
         entity.setDate(LocalDate.of(1970, 1, 1));
         final NestedEntity nestedEntity = new NestedEntity();
-        nestedEntity.setValue("hainet");
+        nestedEntity.setValue("Nested value");
         entity.setNestedEntity(nestedEntity);
+        entity.setPublicValue("Public value");
 
         // Model
         final EntityModel model = new EntityModel();
-        model.setValue("hainet");
+        model.setValue("Value");
         model.setDate(LocalDate.of(1970, 1, 1));
         model.setToString("1970-01-01");
         model.setFormat("1970-01");
         final NestedEntityModel nestedEntityModel = new NestedEntityModel();
-        nestedEntityModel.setValue("hainet");
+        nestedEntityModel.setValue("Nested value");
         model.setNestedEntityModel(nestedEntityModel);
         model.setConstant("CONSTANT");
+        model.setPublicValue("Public value");
 
         assertThat(entityMapper.entityToModel(entity), is(model));
     }
@@ -126,18 +128,5 @@ public class MapStructTest {
         model.setAge(25);
 
         assertThat(personMapper.entityToModel(entity, 25), is(model));
-    }
-
-    @Test
-    public void mappingWithDirectFieldAccessTest() {
-        // Entity
-        final PublicEntity entity = new PublicEntity();
-        entity.value = "hainet";
-
-        // Model
-        final PublicEntityModel model = new PublicEntityModel();
-        model.value = "hainet";
-
-        assertThat(publicEntityMapper.entityToModel(entity), is(model));
     }
 }

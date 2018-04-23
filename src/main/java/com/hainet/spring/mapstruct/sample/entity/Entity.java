@@ -12,4 +12,6 @@ public class Entity {
     private LocalDate date;
 
     private NestedEntity nestedEntity;
+
+    public String publicValue;
 }
