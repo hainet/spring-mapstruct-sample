@@ -1,10 +1,7 @@
 package com.hainet.spring.mapstruct.sample;
 
 import com.hainet.spring.mapstruct.sample.entity.*;
-import com.hainet.spring.mapstruct.sample.mapper.CreditCardMapper;
-import com.hainet.spring.mapstruct.sample.mapper.EntityMapper;
-import com.hainet.spring.mapstruct.sample.mapper.FullNameMapper;
-import com.hainet.spring.mapstruct.sample.mapper.PersonMapper;
+import com.hainet.spring.mapstruct.sample.mapper.*;
 import com.hainet.spring.mapstruct.sample.model.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +29,12 @@ public class MapStructTest {
 
     @Autowired
     private PersonMapper personMapper;
+
+    @Autowired
+    private AnnotatedMarkdownMapper annotatedMarkdownMapper;
+
+    @Autowired
+    private NamedMarkdownMapper namedMarkdownMapper;
 
     @Test
     public void basicMappingsTest() {
@@ -118,5 +121,23 @@ public class MapStructTest {
         model.setAge(25);
 
         assertThat(personMapper.entityToModel(entity, 25), is(model));
+    }
+
+    @Test
+    public void mappingMethodSelectionBasedOnQualifiersTest() {
+        // Raw
+        final Text raw = new Text();
+        raw.setValue("Text");
+
+        // Decorated
+        final Text emphasize = new Text();
+        emphasize.setValue("**Text**");
+        final Text strike = new Text();
+        strike.setValue("~~Text~~");
+
+        assertThat(annotatedMarkdownMapper.emphasize(raw), is(emphasize));
+        assertThat(annotatedMarkdownMapper.strike(raw), is(strike));
+        assertThat(namedMarkdownMapper.emphasize(raw), is(emphasize));
+        assertThat(namedMarkdownMapper.strike(raw), is(strike));
     }
 }
