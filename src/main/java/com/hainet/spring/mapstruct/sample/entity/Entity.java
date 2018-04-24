@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Data
 public class Entity {
@@ -15,6 +16,8 @@ public class Entity {
     private LocalDate date;
 
     private List<String> list;
+
+    private Stream<String> stream;
 
     private NestedEntity nestedEntity;
 }

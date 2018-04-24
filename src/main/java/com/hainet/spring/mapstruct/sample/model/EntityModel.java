@@ -16,6 +16,8 @@ public class EntityModel {
 
     private List<String> list;
 
+    private List<String> stream;
+
     private String toString;
 
     private String format;

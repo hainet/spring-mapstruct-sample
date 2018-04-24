@@ -10,7 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -44,7 +45,8 @@ public class MapStructTest {
         entity.setValue("Value");
         entity.setPublicValue("Public value");
         entity.setDate(LocalDate.of(1970, 1, 1));
-        entity.setList(Arrays.asList("1", "2", "3"));
+        entity.setList(Collections.emptyList());
+        entity.setStream(Stream.empty());
         final NestedEntity nestedEntity = new NestedEntity();
         nestedEntity.setValue("Nested value");
         entity.setNestedEntity(nestedEntity);
@@ -54,7 +56,8 @@ public class MapStructTest {
         model.setValue("Value");
         model.setPublicValue("Public value");
         model.setDate(LocalDate.of(1970, 1, 1));
-        model.setList(Arrays.asList("1", "2", "3"));
+        model.setList(Collections.emptyList());
+        model.setStream(Collections.emptyList());
         model.setToString("1970-01-01");
         model.setFormat("1970-01");
         final NestedEntityModel nestedEntityModel = new NestedEntityModel();
