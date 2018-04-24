@@ -24,6 +24,9 @@ public class MapStructTest {
     private EntityMapper entityMapper;
 
     @Autowired
+    private DateExpressionMapper dateExpressionMapper;
+
+    @Autowired
     private EnumMapper enumMapper;
 
     @Autowired
@@ -47,7 +50,6 @@ public class MapStructTest {
         final Entity entity = new Entity();
         entity.setValue("Value");
         entity.setPublicValue("Public value");
-        entity.setDate(LocalDate.of(1970, 1, 1));
         entity.setList(Collections.emptyList());
         entity.setStream(Stream.empty());
         final NestedEntity nestedEntity = new NestedEntity();
@@ -58,17 +60,30 @@ public class MapStructTest {
         final EntityModel model = new EntityModel();
         model.setValue("Value");
         model.setPublicValue("Public value");
-        model.setDate(LocalDate.of(1970, 1, 1));
         model.setList(Collections.emptyList());
         model.setStream(Collections.emptyList());
-        model.setToString("1970-01-01");
-        model.setFormat("1970-01");
         final NestedEntityModel nestedEntityModel = new NestedEntityModel();
         nestedEntityModel.setValue("Nested value");
         model.setNestedEntityModel(nestedEntityModel);
         model.setConstant("CONSTANT");
 
         assertThat(entityMapper.entityToModel(entity), is(model));
+    }
+
+    @Test
+    public void dateExpressionTest() {
+        // Entity
+        final DateExpression entity = new DateExpression();
+        entity.setDate(LocalDate.of(1970, 1, 1));
+
+        // Model
+        final DateExpressionModel model = new DateExpressionModel();
+        model.setDate(LocalDate.of(1970, 1, 1));
+        model.setToString("1970-01-01");
+        model.setFormat("1970-01");
+        model.setExpressed(LocalDate.of(1970, 1, 1));
+
+        assertThat(dateExpressionMapper.entityToModel(entity, 1970, 1, 1), is(model));
     }
 
     @Test
