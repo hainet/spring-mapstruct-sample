@@ -3,13 +3,18 @@ package com.hainet.spring.mapstruct.sample.model;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class EntityModel {
 
     private String value;
 
+    public String publicValue;
+
     private LocalDate date;
+
+    private List<String> list;
 
     private String toString;
 
@@ -18,6 +23,4 @@ public class EntityModel {
     private NestedEntityModel nestedEntityModel;
 
     private String constant;
-
-    public String publicValue;
 }
