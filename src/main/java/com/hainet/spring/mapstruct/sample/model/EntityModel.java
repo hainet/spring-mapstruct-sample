@@ -14,13 +14,13 @@ public class EntityModel {
 
     private LocalDate date;
 
-    private List<String> list;
-
-    private List<String> stream;
-
     private String toString;
 
     private String format;
+
+    private List<String> list;
+
+    private List<String> stream;
 
     private NestedEntityModel nestedEntityModel;
 

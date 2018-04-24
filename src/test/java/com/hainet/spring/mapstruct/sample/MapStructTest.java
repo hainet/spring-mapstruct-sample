@@ -24,6 +24,9 @@ public class MapStructTest {
     private EntityMapper entityMapper;
 
     @Autowired
+    private EnumMapper enumMapper;
+
+    @Autowired
     private FullNameMapper fullNameMapper;
 
     @Autowired
@@ -66,6 +69,14 @@ public class MapStructTest {
         model.setConstant("CONSTANT");
 
         assertThat(entityMapper.entityToModel(entity), is(model));
+    }
+
+    @Test
+    public void mappingEnumsTest() {
+        assertThat(enumMapper.heightToSize(null), is(Size.M));
+        assertThat(enumMapper.heightToSize(Height.SHORT), is(Size.S));
+        assertThat(enumMapper.heightToSize(Height.TALL), is(Size.L));
+        assertThat(enumMapper.heightToSize(Height.OTHERS), is(Size.ORDER));
     }
 
     @Test
