@@ -1,18 +1,19 @@
 package com.hainet.spring.mapstruct.sample.mapper;
 
-import com.hainet.spring.mapstruct.sample.entity.DateExpression;
-import com.hainet.spring.mapstruct.sample.model.DateExpressionModel;
+import com.hainet.spring.mapstruct.sample.model.DateModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+
+import java.time.LocalDate;
 
 @Mapper
 public interface DateExpressionMapper {
 
     @Mappings({
-            @Mapping(source = "entity.date", target = "toString"),
-            @Mapping(source = "entity.date", target = "format", dateFormat = "yyyy-MM"),
-            @Mapping(target = "expressed", expression = "java(java.time.LocalDate.of(year, month, day))")
+            @Mapping(source = "date", target = "date"),
+            @Mapping(source = "date", target = "toString"),
+            @Mapping(source = "date", target = "format", dateFormat = "yyyy-MM"),
     })
-    DateExpressionModel entityToModel(DateExpression entity, int year, int month, int day);
+    DateModel entityToModel(LocalDate date);
 }

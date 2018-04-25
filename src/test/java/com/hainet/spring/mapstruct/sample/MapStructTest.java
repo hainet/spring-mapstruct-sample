@@ -30,6 +30,9 @@ public class MapStructTest {
     private EnumMapper enumMapper;
 
     @Autowired
+    private ExpressionMapper expressionMapper;
+
+    @Autowired
     private FullNameMapper fullNameMapper;
 
     @Autowired
@@ -72,18 +75,13 @@ public class MapStructTest {
 
     @Test
     public void dateExpressionTest() {
-        // Entity
-        final DateExpression entity = new DateExpression();
-        entity.setDate(LocalDate.of(1970, 1, 1));
-
         // Model
-        final DateExpressionModel model = new DateExpressionModel();
+        final DateModel model = new DateModel();
         model.setDate(LocalDate.of(1970, 1, 1));
         model.setToString("1970-01-01");
         model.setFormat("1970-01");
-        model.setExpressed(LocalDate.of(1970, 1, 1));
 
-        assertThat(dateExpressionMapper.entityToModel(entity, 1970, 1, 1), is(model));
+        assertThat(dateExpressionMapper.entityToModel(LocalDate.of(1970, 1, 1)), is(model));
     }
 
     @Test
@@ -92,6 +90,15 @@ public class MapStructTest {
         assertThat(enumMapper.heightToSize(Height.SHORT), is(Size.S));
         assertThat(enumMapper.heightToSize(Height.TALL), is(Size.L));
         assertThat(enumMapper.heightToSize(Height.OTHERS), is(Size.ORDER));
+    }
+
+    @Test
+    public void expressionTest() {
+        // Model
+        final ExpressionModel model = new ExpressionModel();
+        model.setValue(4);
+
+        assertThat(expressionMapper.power(2), is(model));
     }
 
     @Test

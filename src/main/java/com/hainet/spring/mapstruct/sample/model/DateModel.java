@@ -5,13 +5,11 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class DateExpressionModel {
+public class DateModel {
 
     private LocalDate date;
 
     private String toString;
 
     private String format;
-
-    private LocalDate expressed;
 }
