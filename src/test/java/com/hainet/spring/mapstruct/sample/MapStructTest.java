@@ -69,6 +69,7 @@ public class MapStructTest {
         nestedEntityModel.setValue("Nested value");
         model.setNestedEntityModel(nestedEntityModel);
         model.setConstant("CONSTANT");
+        model.setDefaultValue("undefined");
 
         assertThat(entityMapper.entityToModel(entity), is(model));
     }
@@ -111,6 +112,7 @@ public class MapStructTest {
         final EntityModel model = new EntityModel();
         model.setValue("hainet");
         model.setConstant("CONSTANT");
+        model.setDefaultValue("undefined");
 
         final EntityModel actual = new EntityModel();
         entityMapper.entityToModel(actual, entity);

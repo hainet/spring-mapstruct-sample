@@ -17,4 +17,6 @@ public class Entity {
     private Stream<String> stream;
 
     private NestedEntity nestedEntity;
+
+    private String defaultValue;
 }

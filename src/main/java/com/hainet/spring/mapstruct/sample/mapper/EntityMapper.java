@@ -12,13 +12,15 @@ public interface EntityMapper {
 
     @Mappings({
             @Mapping(source = "nestedEntity", target = "nestedEntityModel"),
-            @Mapping(constant = "CONSTANT", target = "constant"),
+            @Mapping(target = "defaultValue", defaultValue = "undefined"),
+            @Mapping(target = "constant", constant = "CONSTANT")
     })
     EntityModel entityToModel(Entity entity);
 
     @Mappings({
             @Mapping(source = "nestedEntity", target = "nestedEntityModel"),
-            @Mapping(constant = "CONSTANT", target = "constant"),
+            @Mapping(target = "defaultValue", defaultValue = "undefined"),
+            @Mapping(target = "constant", constant = "CONSTANT")
     })
     void entityToModel(@MappingTarget EntityModel model, Entity entity);
 }
