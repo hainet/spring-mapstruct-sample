@@ -47,6 +47,9 @@ public class MapStructTest {
     @Autowired
     private NamedMarkdownMapper namedMarkdownMapper;
 
+    @Autowired
+    private CreatedModelMapper createdModelMapper;
+
     @Test
     public void basicMappingsTest() {
         // Entity
@@ -180,5 +183,19 @@ public class MapStructTest {
         assertThat(annotatedMarkdownMapper.strike(raw), is(strike));
         assertThat(namedMarkdownMapper.emphasize(raw), is(emphasize));
         assertThat(namedMarkdownMapper.strike(raw), is(strike));
+    }
+
+    @Test
+    public void factoryObjectTest() {
+        // Entity
+        final Entity entity = new Entity();
+        entity.setValue("Value");
+
+        // Model
+        final CreatedModel model = new CreatedModel();
+        model.setValue("Value");
+        model.setName("hainet");
+
+        assertThat(createdModelMapper.entityToModel(entity), is(model));
     }
 }
