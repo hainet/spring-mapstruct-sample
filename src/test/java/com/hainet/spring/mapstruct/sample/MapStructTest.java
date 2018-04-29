@@ -50,6 +50,9 @@ public class MapStructTest {
     @Autowired
     private CreatedModelMapper createdModelMapper;
 
+    @Autowired
+    private FruitMapper fruitMapper;
+
     @Test
     public void basicMappingsTest() {
         // Entity
@@ -197,5 +200,16 @@ public class MapStructTest {
         model.setName("hainet");
 
         assertThat(createdModelMapper.entityToModel(entity), is(model));
+    }
+
+    @Test
+    public void determineResultTypeTest() {
+        // Model
+        final Apple model = new Apple();
+        model.setColor("Red");
+
+        final Fruit actual = fruitMapper.entityToModel(new Entity());
+        assertThat(actual, is(model));
+        assertThat(actual.introduce(), is("I am Apple!"));
     }
 }
