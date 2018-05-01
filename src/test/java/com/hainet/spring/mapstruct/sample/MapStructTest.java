@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,6 +23,9 @@ public class MapStructTest {
 
     @Autowired
     private EntityMapper entityMapper;
+
+    @Autowired
+    private EntityMapperWithException entityMapperWithException;
 
     @Autowired
     private DateExpressionMapper dateExpressionMapper;
@@ -124,6 +128,24 @@ public class MapStructTest {
         entityMapper.entityToModel(actual, entity);
 
         assertThat(actual, is(model));
+    }
+
+    @Test
+    public void mappingWithExceptionTest() {
+        // Entity
+        final Entity entity = new Entity();
+
+        // Model
+        final EntityModel model = new EntityModel();
+        model.setConstant("CONSTANT");
+        model.setDefaultValue("undefined");
+
+        try {
+            assertThat(entityMapperWithException.entityToModelWithException(entity), is(model));
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
     }
 
     @Test
