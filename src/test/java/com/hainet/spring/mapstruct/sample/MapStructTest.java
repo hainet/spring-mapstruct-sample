@@ -57,6 +57,9 @@ public class MapStructTest {
     @Autowired
     private FruitMapper fruitMapper;
 
+    @Autowired
+    private InsideOutsideMapper insideOutsideMapper;
+
     @Test
     public void basicMappingsTest() {
         // Entity
@@ -233,5 +236,19 @@ public class MapStructTest {
         final Fruit actual = fruitMapper.entityToModel(new Entity());
         assertThat(actual, is(model));
         assertThat(actual.introduce(), is("I am Apple!"));
+    }
+
+    @Test
+    public void inheritInverseConfigurationTest() {
+        // Entity
+        final Inside inside = new Inside();
+        inside.setInside("Value");
+
+        // Model
+        final Outside outside = new Outside();
+        outside.setOutside("Value");
+
+        assertThat(insideOutsideMapper.insideToOutside(inside), is(outside));
+        assertThat(insideOutsideMapper.outsideToInside(outside), is(inside));
     }
 }
