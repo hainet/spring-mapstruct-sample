@@ -60,6 +60,9 @@ public class MapStructTest {
     @Autowired
     private InsideOutsideMapper insideOutsideMapper;
 
+    @Autowired
+    private CallbackMapper callbackMapper;
+
     @Test
     public void basicMappingsTest() {
         // Entity
@@ -250,5 +253,12 @@ public class MapStructTest {
 
         assertThat(insideOutsideMapper.insideToOutside(inside), is(outside));
         assertThat(insideOutsideMapper.outsideToInside(outside), is(inside));
+    }
+
+    @Test
+    public void callbackMethodsTest() {
+        final Entity entity = new Entity();
+        entity.setValue("Value");
+        callbackMapper.toModel(entity);
     }
 }
