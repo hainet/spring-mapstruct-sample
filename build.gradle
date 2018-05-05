@@ -37,10 +37,11 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
 
-    compileOnly('org.projectlombok:lombok')
-    apt('org.projectlombok:lombok')
     compile('org.mapstruct:mapstruct-jdk8:1.2.0.Final')
     apt('org.mapstruct:mapstruct-processor:1.2.0.Final')
+
+    compileOnly('org.projectlombok:lombok')
+    apt('org.projectlombok:lombok')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
